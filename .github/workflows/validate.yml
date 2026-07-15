@@ -1,0 +1,41 @@
+name: Validate Prompt Cards
+
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+      - "examples/**"
+  push:
+    branches: [main]
+    paths:
+      - "prompts/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml yamllint
+
+      - name: YAML lint
+        run: |
+          find prompts/ -name "*.yaml" -exec yamllint -d relaxed {} +
+
+      - name: Validate prompt cards
+        run: python scripts/validate_cards.py
+
+      - name: Check for secrets
+        run: |
+          PATTERNS='sk-[a-zA-Z0-9]{20,}|ghp_[a-zA-Z0-9]{36,}|AKIA[0-9A-Z]{16}|BEGIN.PRIVATE.KEY'
+          if grep -rEn "$PATTERNS" prompts/ examples/ docs/; then
+            echo "::error::Potential secrets found in repository files!"
+            exit 1
+          fi
+          echo "No secrets detected."

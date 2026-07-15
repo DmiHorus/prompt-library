@@ -1,0 +1,47 @@
+# =============================================================================
+# Prompt Card Template
+# Copy this file to prompts/categories/<category>/<category>_<action>_<detail>.yaml
+# Fill in ALL fields. Remove comments when done.
+# =============================================================================
+
+# --- Metadata ---
+id: "category.action_detail"           # unique ID, format: category.snake_case_name
+version: "1.0.0"                       # semver: major.minor.patch
+owner: "@your-github-handle"           # responsible person, required PR reviewer
+category: "category_name"              # must match folder name in categories/
+tags: [tag1, tag2]                     # freeform, see docs/taxonomy.md
+model: "claude"                        # target model: claude, gpt-4o, gigachat, etc.
+purpose: "One sentence: what this prompt does and for whom."
+
+# --- Prompt ---
+system: |
+  System message. Define the role, tone, constraints.
+  Be concise. Remove filler words.
+
+user_template: |
+  Task: ...
+  Input:
+    - {{variable_1}}: description
+    - {{variable_2}}: description
+  Output: ...
+
+# --- Contract ---
+expected_output_format: |
+  Describe the expected shape: Markdown, JSON, table, N paragraphs, etc.
+
+variables:
+  - name: "variable_1"
+    description: "What this variable contains"
+    example: "example value"
+  - name: "variable_2"
+    description: "What this variable contains"
+    example: "example value"
+
+# --- Quality ---
+tests:
+  - "Output matches expected format"
+  - "No hallucinated data"
+  - "Length within bounds"
+
+changelog: |
+  v1.0.0 — Initial version.

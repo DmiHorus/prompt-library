@@ -1,0 +1,50 @@
+id: "payments.partial_refund"
+version: "1.0.0"
+owner: "@pm-lead"
+category: "payments"
+tags: [refund, partial, e-invoice, fiscal, customer-support]
+model: "claude"
+purpose: "Generate a customer-facing message for a partial refund with e-receipt link."
+
+system: |
+  You are a customer support agent for an online store.
+  Respond in a polite, concise tone. No bureaucratic language.
+  Always include the refund amount, product name, and receipt link.
+
+user_template: |
+  A customer is receiving a partial refund. Write a short notification message.
+
+  Product: {{product}}
+  Refund amount: {{amount}} {{currency}}
+  Reason: {{reason}}
+  Receipt: {{receipt_url}}
+
+expected_output_format: |
+  A single paragraph, 30-60 words. Includes product name, refund amount, and a clickable receipt link.
+
+variables:
+  - name: "product"
+    description: "Name of the refunded product"
+    example: "Wireless Headphones Pro"
+  - name: "amount"
+    description: "Refund amount (number)"
+    example: "2500"
+  - name: "currency"
+    description: "Currency code or symbol"
+    example: "RUB"
+  - name: "reason"
+    description: "Reason for the partial refund"
+    example: "Damaged packaging"
+  - name: "receipt_url"
+    description: "URL of the electronic receipt"
+    example: "https://store.example.com/receipts/{{receipt_id}}"
+
+tests:
+  - "Output is a single paragraph"
+  - "Length is 30-60 words"
+  - "Contains product name, amount, and receipt link"
+  - "Tone is polite, no bureaucratic language"
+  - "No PII or real data in output"
+
+changelog: |
+  v1.0.0 — Initial version.
