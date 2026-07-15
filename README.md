@@ -2,7 +2,8 @@
 
 Командная библиотека промптов, управляемая как код. Промпты хранятся в виде YAML-карточек с метаданными, версионированием и проверкой в CI.
 
-Рабочий каталог проекта — `~/PyCharmMiscProject/M61`.
+**Репозиторий:** https://github.com/DmiHorus/prompt-library  
+**Рабочий каталог:** `~/PyCharmMiscProject/M61`
 
 ## Возможности
 
@@ -34,20 +35,31 @@ OPENAI_API_KEY=sk-...
 ### 3. Работа с промптами
 
 ```bash
-# Просмотр и валидация существующих карточек
+# Валидация всех карточек
 python scripts/validate_cards.py
 
-# Рефакторинг личного промпта (предпросмотр без записи)
+# Рефакторинг личного промпта (предпросмотр)
 python scripts/refactor_prompt.py \
-  --input my_prompt.txt \
+  --input RAW_prompt/my_prompt.md \
   --owner "@you" \
+  --category requirements_engineering \
   --dry-run
 
 # Запись карточки в prompts/categories/
 python scripts/refactor_prompt.py \
-  --input my_prompt.txt \
+  --input RAW_prompt/my_prompt.md \
   --owner "@you"
 ```
+
+## Каталог промптов
+
+| ID | Категория | Назначение |
+|----|-----------|------------|
+| `payments.partial_refund` | payments | Сообщение клиенту о частичном возврате с ссылкой на чек |
+| `rag.query_rewrite` | rag | Переписывание запроса пользователя для векторного поиска |
+| `requirements_engineering.user_input_to_fr` | requirements_engineering | Преобразование интервью/стенограммы в FR/NFR и артефакты для ТЗ |
+
+Примеры входа/выхода — в `examples/<category>/`.
 
 ## CLI: refactor_prompt.py
 
@@ -66,7 +78,7 @@ python scripts/refactor_prompt.py \
 | Параметр | Описание |
 |----------|----------|
 | `--input FILE` | Файл с сырым промптом |
-| `--stdin` | Читать промпт из stdin (`cat prompt.txt \| ...`) |
+| `--stdin` | Читать промпт из stdin |
 | `--owner @handle` | Владелец карточки (**обязательный**) |
 | `--model MODEL` | Целевая модель в карточке (default: `gpt-4o`) |
 | `--category NAME` | Категория или `auto` (default: `auto`) |
@@ -75,16 +87,17 @@ python scripts/refactor_prompt.py \
 | `--env-file PATH` | Альтернативный путь к `.env` |
 | `--repo-root PATH` | Корень репозитория (default: автоопределение) |
 
-Без `--input` и `--stdin` запускается интерактивный режим: вставьте промпт в терминал, завершите двойным Enter или Ctrl+D.
+Без `--input` и `--stdin` — интерактивный режим (двойной Enter или Ctrl+D для завершения).
 
 ## Структура проекта
 
 ```
 M61/
-  .env                          # OPENAI_API_KEY и прочие секреты
+  .env                          # OPENAI_API_KEY (не коммитится)
   requirements.txt              # зависимости Python
+  RAW_prompt/                   # исходные черновики промптов
   prompts/
-    categories/                 # промпты по доменам
+    categories/                 # YAML-карточки по доменам
       payments/
       rag/
       transcription/
@@ -100,11 +113,11 @@ M61/
     refactor_prompt.py          # CLI: рефакторинг по CLEAR
     validate_cards.py           # валидация YAML-карточек
     refactor_prompt/            # модули CLI-инструмента
-  tests/                        # тест-кейсы для промптов
+  tests/
   .github/workflows/            # CI
 ```
 
-## Категории промптов
+## Категории
 
 | Категория | Описание |
 |-----------|----------|
@@ -113,7 +126,7 @@ M61/
 | `transcription` | Заметки со встреч, action items, саммари |
 | `product_requirements` | PRD, feature briefs, спецификации |
 | `code_review` | Чеклисты ревью, саммари PR, обратная связь |
-| `requirements_engineering` | Формальный анализ требований (FR/NFR, допущения, риски) для ТЗ |
+| `requirements_engineering` | Формальный анализ требований (FR/NFR, допущения, риски) для ТЗ по ISO 29148, BABOK, ГОСТ 34.602 |
 
 Подробнее — в [docs/taxonomy.md](docs/taxonomy.md).
 
