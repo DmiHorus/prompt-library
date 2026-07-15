@@ -1,0 +1,40 @@
+id: "rag.query_rewrite"
+version: "1.0.0"
+owner: "@ml-engineer"
+category: "rag"
+tags: [query, rewrite, search, retrieval]
+model: "claude"
+purpose: "Rewrite a vague user query into an optimized search query for vector retrieval."
+
+system: |
+  You are a search query optimizer. Your job is to rewrite a user's natural language
+  question into a concise, specific query that maximizes relevant document retrieval.
+  Remove filler words. Expand abbreviations. Add implicit context when obvious.
+
+user_template: |
+  Rewrite the following user question into an optimized search query.
+
+  Original question: {{user_question}}
+  Domain context: {{domain}}
+
+  Return ONLY the rewritten query, nothing else.
+
+expected_output_format: |
+  A single line: the rewritten search query (5-20 words).
+
+variables:
+  - name: "user_question"
+    description: "The raw user question"
+    example: "how do I do a refund?"
+  - name: "domain"
+    description: "The knowledge domain for context"
+    example: "e-commerce payment processing"
+
+tests:
+  - "Output is a single line"
+  - "Length is 5-20 words"
+  - "No filler words (please, can you, I want to)"
+  - "More specific than the original query"
+
+changelog: |
+  v1.0.0 — Initial version.
