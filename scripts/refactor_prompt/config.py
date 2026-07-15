@@ -50,6 +50,7 @@ KNOWN_CATEGORIES = [
     "transcription",
     "product_requirements",
     "code_review",
+    "requirements_engineering",
 ]
 
 

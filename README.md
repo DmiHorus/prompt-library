@@ -90,6 +90,7 @@ M61/
       transcription/
       product_requirements/
       code_review/
+      requirements_engineering/
     templates/
       card_template.yaml        # шаблон YAML-карточки
     variants/                   # A/B и экспериментальные версии
@@ -112,6 +113,7 @@ M61/
 | `transcription` | Заметки со встреч, action items, саммари |
 | `product_requirements` | PRD, feature briefs, спецификации |
 | `code_review` | Чеклисты ревью, саммари PR, обратная связь |
+| `requirements_engineering` | Формальный анализ требований (FR/NFR, допущения, риски) для ТЗ |
 
 Подробнее — в [docs/taxonomy.md](docs/taxonomy.md).
 
