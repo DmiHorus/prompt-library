@@ -1,32 +1,32 @@
-# Contribution Guide
+# Руководство по участию
 
-## PR Checklist
+## Чеклист PR
 
-Before opening a PR, verify:
+Перед открытием PR проверьте:
 
-- [ ] YAML card has all required fields (id, version, owner, category, tags, purpose, model, system, user_template, expected_output_format).
-- [ ] `id` follows the pattern `category.action_detail` (e.g., `payments.partial_refund`).
-- [ ] `version` follows semver (e.g., `"1.0.0"`).
-- [ ] No real secrets, tokens, PII, or internal URLs — only placeholders like `{{order_id}}`.
-- [ ] Filename matches the pattern `{category}_{action}_{detail}.yaml`.
-- [ ] PR description includes example input and output.
-- [ ] Changelog entry added inside the YAML card.
+- [ ] YAML-карточка содержит все обязательные поля (id, version, owner, category, tags, purpose, model, system, user_template, expected_output_format).
+- [ ] `id` соответствует шаблону `category.action_detail` (например, `payments.partial_refund`).
+- [ ] `version` соответствует semver (например, `"1.0.0"`).
+- [ ] Нет реальных секретов, токенов, PII или внутренних URL — только плейсхолдеры вроде `{{order_id}}`.
+- [ ] Имя файла соответствует шаблону `{category}_{action}_{detail}.yaml`.
+- [ ] В описании PR есть пример входа и выхода.
+- [ ] В YAML-карточку добавлена запись в `changelog`.
 
-## Commit Messages
+## Сообщения коммитов
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+Следуйте [Conventional Commits](https://www.conventionalcommits.org/):
 
 - `feat(prompts): add partial refund prompt for payments`
 - `fix(prompts): clarify output format in rag query rewrite`
 - `docs: update taxonomy with new code_review category`
 - `chore(ci): add secret detection step`
 
-## Branch Naming
+## Именование веток
 
-- New prompt: `feature/add-{category}-{name}`
-- Edit prompt: `fix/{category}-{name}-{what}`
-- Docs: `docs/{what}`
+- Новый промпт: `feature/add-{category}-{name}`
+- Редактирование промпта: `fix/{category}-{name}-{what}`
+- Документация: `docs/{what}`
 
-## Reviews
+## Ревью
 
-Every prompt has an `owner` field. That person is a required reviewer for changes to their prompt.
+У каждого промпта есть поле `owner`. Этот человек — обязательный ревьюер изменений своего промпта.

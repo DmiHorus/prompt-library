@@ -1,40 +1,40 @@
-# Prompt Library — Documentation
+# Библиотека промптов — документация
 
-## How to find a prompt
+## Как найти промпт
 
-1. Go to `prompts/categories/<domain>/`.
-2. Each `.yaml` file is a self-contained prompt card with metadata.
-3. Use `tags` field for cross-domain search: `grep -r "tags:.*refund" prompts/`.
+1. Перейдите в `prompts/categories/<domain>/`.
+2. Каждый файл `.yaml` — самодостаточная карточка промпта с метаданными.
+3. Для поиска по доменам используйте поле `tags`: `grep -r "tags:.*refund" prompts/`.
 
-## How to add a new prompt
+## Как добавить новый промпт
 
-1. Copy `prompts/templates/card_template.yaml` into the appropriate category folder.
-2. Fill in ALL required fields (see template comments).
-3. Add a synthetic example to `examples/<category>/`.
-4. Create a feature branch: `git checkout -b feature/add-<category>-<name>`.
-5. Commit with Conventional Commits: `feat(prompts): add <name> for <category>`.
-6. Open a PR. The prompt `owner` is a required reviewer.
+1. Скопируйте `prompts/templates/card_template.yaml` в нужную папку категории.
+2. Заполните ВСЕ обязательные поля (см. комментарии в шаблоне).
+3. Добавьте синтетический пример в `examples/<category>/`.
+4. Создайте feature-ветку: `git checkout -b feature/add-<category>-<name>`.
+5. Закоммитьте по Conventional Commits: `feat(prompts): add <name> for <category>`.
+6. Откройте PR. Поле `owner` промпта — обязательный ревьюер.
 
-## How to update an existing prompt
+## Как обновить существующий промпт
 
-1. Create a branch: `git checkout -b fix/<category>-<name>-<what>`.
-2. Edit the YAML card. Bump `version` following semver:
-   - **Major** (2.0.0): structural/behavioral change, old version incompatible.
-   - **Minor** (1.1.0): new variables, added context, backward compatible.
-   - **Patch** (1.0.1): typo fixes, wording tweaks.
-3. Update `changelog` inside the card.
-4. Include before/after output examples in the PR description.
-5. Commit: `fix(prompts): <what changed>` or `feat(prompts): <what added>`.
+1. Создайте ветку: `git checkout -b fix/<category>-<name>-<what>`.
+2. Отредактируйте YAML-карточку. Обновите `version` по semver:
+   - **Major** (2.0.0): структурное/поведенческое изменение, старая версия несовместима.
+   - **Minor** (1.1.0): новые переменные, добавленный контекст, обратно совместимо.
+   - **Patch** (1.0.1): исправления опечаток, правки формулировок.
+3. Обновите `changelog` внутри карточки.
+4. Включите примеры вывода «до/после» в описание PR.
+5. Закоммитьте: `fix(prompts): <what changed>` или `feat(prompts): <what added>`.
 
-## Versioning
+## Версионирование
 
-We use semantic versioning inside each YAML card (`version` field).
-Git history tracks all changes. Tags are optional for major releases.
+В каждой YAML-карточке используется семантическое версионирование (поле `version`).
+История Git фиксирует все изменения. Теги опциональны для major-релизов.
 
-## Onboarding
+## Онбординг
 
-New team members should:
-1. Read this document (5 min).
-2. Read `docs/taxonomy.md` for category descriptions (3 min).
-3. Read `docs/contribution_guide.md` for the PR checklist (2 min).
-4. Open any card in `prompts/categories/` to see a real example.
+Новым участникам команды рекомендуется:
+1. Прочитать этот документ (5 мин).
+2. Прочитать `docs/taxonomy.md` для описания категорий (3 мин).
+3. Прочитать `docs/contribution_guide.md` для чеклиста PR (2 мин).
+4. Открыть любую карточку в `prompts/categories/` и посмотреть реальный пример.
